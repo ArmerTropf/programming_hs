@@ -1,7 +1,7 @@
 
 public class Quicksort 
 {
-	// quicksort implementation
+	//  quicksort implementation
     public static void qsort(int[][] arr, int col) {
         partition(arr, 0, arr.length - 1, col, (col+1)%3, (col+2)%3);
     }
