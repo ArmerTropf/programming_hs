@@ -6,9 +6,8 @@ public class  test_comp
 	{
 		Integer[] go = new Integer[3];
 		
-		//naja
-		//oder so
-		//gfgfg
+		//gogogogogogogog
+		
 		
 		go[0] = 1;
 		go[1] = 2;
