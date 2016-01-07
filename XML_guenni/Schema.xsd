@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"> 
+    <xs:element name="Hochschule">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Labor" type="LaborType" minOccurs="1" maxOccurs="unbounded" />
+                <xs:element name="Software" type="SoftwareType" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+            
+        </xs:complexType>
+        <xs:unique name="LaborID">
+            <xs:selector xpath="Labor"></xs:selector>
+            <xs:field xpath="@Raumnummer"></xs:field>
+        </xs:unique>
+        <xs:unique name="ComputerID">
+            <xs:selector xpath="Labor/Computer"></xs:selector>
+            <xs:field xpath="@Name"></xs:field>
+        </xs:unique>
+        <xs:key name="SoftwareID">
+            <xs:selector xpath="Software"></xs:selector>
+            <xs:field xpath="@ID"></xs:field>
+        </xs:key>
+        <xs:keyref refer="SoftwareID" name="SoftwareIDRef">
+            <xs:selector xpath="Labor/Computer/Software"></xs:selector>
+            <xs:field xpath="@refID"></xs:field>
+        </xs:keyref>
+    </xs:element>
+    
+    <xs:complexType name="LaborType">
+        <xs:sequence>
+            <xs:element name="Computer" type="ComputerType" minOccurs="1" maxOccurs="unbounded"></xs:element>
+            <xs:element name="Scanner" type="ScannerType" minOccurs="0" maxOccurs="unbounded"></xs:element>
+            <xs:element name="Drucker" type="DruckerType" minOccurs="0" maxOccurs="unbounded"></xs:element>
+        </xs:sequence>
+        <xs:attribute name="Raumnummer" type="xs:NCName" use="required"></xs:attribute>
+        <xs:attribute name="Name" type="xs:string" use="required"></xs:attribute>
+    </xs:complexType>
+    
+    <xs:complexType name="SoftwareType">
+        <xs:sequence>
+            <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1"></xs:element>
+            <xs:element name="Beschreibung" type="BeschreibungType" minOccurs="1" maxOccurs="1"></xs:element>
+            <xs:element name="Besonderheiten" minOccurs="0" maxOccurs="unbounded" type="xs:string" ></xs:element>
+        </xs:sequence>
+        <xs:attribute name="ID" type="xs:NCName" use="required"></xs:attribute>
+    </xs:complexType>
+    
+    <xs:complexType name="SoftwareID">
+        <xs:attribute name="refID" type="xs:NCName" use="required"></xs:attribute>
+        <xs:attribute name="lizensiert" type="xs:boolean" default="true"></xs:attribute>
+    </xs:complexType>
+    
+    <xs:complexType name="ComputerType">
+        <xs:sequence>
+            <xs:element name="Betriebssystem" type="xs:string" minOccurs="1" maxOccurs="1" />            
+            <xs:element name="Beschaffungsdatum" type="xs:date" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Erweiterung" type="ErweiterungType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Software" type="SoftwareID" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Beschreibung" type="BeschreibungType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Besonderheiten" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="Name" type="xs:NCName" use="required"></xs:attribute>
+    </xs:complexType>
+   
+    <xs:complexType name="ScannerType">
+        <xs:sequence>
+            <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1"></xs:element>
+            <xs:element name="Beschaffungsdatum" type="xs:date" minOccurs="1" maxOccurs="1"></xs:element>
+            <xs:element name="Beschreibung" type="BeschreibungType" minOccurs="1" maxOccurs="1"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DruckerType">
+        <xs:sequence>
+            <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1"></xs:element>
+            <xs:element name="Beschaffungsdatum" type="xs:date" minOccurs="1" maxOccurs="1"></xs:element>
+            <xs:element name="Beschreibung" type="BeschreibungType" minOccurs="1" maxOccurs="1"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ErweiterungType">
+        <xs:sequence>
+            <xs:element name="Beschreibung" type="BeschreibungType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Besonderheit" type="xs:string" minOccurs="0" maxOccurs="unbounded"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="BeschreibungType" mixed="true">
+        <xs:sequence>
+            <xs:element name="Hersteller" type="xs:string" minOccurs="1" maxOccurs="unbounded"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Abstrakte ComplexTypes 
+    <xs:complexType name="DeviceType">
+        <xs:sequence>
+            <xs:element name="Beschreibung" type="BeschreibungType"></xs:element>
+            <xs:element name="Beschaffungsdatum" type="xs:date"></xs:element>
+        </xs:sequence>
+        <xs:attribute name="Name" type="xs:NCName" use="required"></xs:attribute>
+    </xs:complexType>
+    -->
+</xs:schema>

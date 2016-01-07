@@ -1,0 +1,26 @@
+
+public class start 
+{
+	public static void main(String[]args)
+	{
+		
+		RedBlackTree<Integer, Integer> RB = new RedBlackTree<>();
+		
+		RB.insert(19, 19);
+		RB.insert(20, 20);
+		RB.insert(21, 21);
+		
+		
+		System.out.println();
+		
+		
+		
+		
+		PTree go = new PTree();
+		
+		System.out.println();
+
+		
+	}
+
+}

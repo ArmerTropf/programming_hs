@@ -1,0 +1,21 @@
+import javax.swing.*;
+
+
+public class mySMenu extends JFrame 
+{
+	mySMenu(String myFramename)
+	{
+		super(myFramename);
+		
+	}
+	
+	
+	
+	
+	public static void main(String[]args)
+	{
+		mySMenu myMenu = new mySMenu("Meine kleines Fenster");
+		
+	}
+
+}

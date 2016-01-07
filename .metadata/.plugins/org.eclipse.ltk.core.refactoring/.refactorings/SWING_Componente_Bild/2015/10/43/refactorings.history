@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Encapsulate field &apos;myPic.str_absolutPath&apos; in &apos;myPic&apos;&#x0D;&#x0A;- Original project: &apos;SWING_Componente_Bild&apos;&#x0D;&#x0A;- Original element: &apos;myPic.str_absolutPath&apos;&#x0D;&#x0A;- Getter method name: &apos;getStr_absolutPath&apos;&#x0D;&#x0A;- Setter method name: &apos;setStr_absolutPath&apos;&#x0D;&#x0A;- Field visibility: &apos;public&apos;&#x0D;&#x0A;- Do not use getter and setter methods in declaring type" comments="false" declaring="false" description="Encapsulate field &apos;str_absolutPath&apos;" flags="589830" getter="getStr_absolutPath" id="org.eclipse.jdt.ui.self.encapsulate" input="/src&lt;{meine.java[myPic^str_absolutPath" insertion="10" setter="setStr_absolutPath" stamp="1445643033024" version="1.0" visibility="1"/>
+</session>

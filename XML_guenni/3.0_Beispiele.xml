@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<example1 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="3.0_Beispiele.xsd">
+
+    <!-- Es darf nur eine Uhrzeit eigegeben werden-->
+    <example0>
+        12:33:00
+    </example0>      
+    
+    <!-- SEQUENCE einmal <one> und min. 2x <two> bis max. 10x <two> -->
+    <example3> 
+        <one></one>
+        <two></two>
+        <two></two>
+        
+        
+    </example3>
+    
+    <!-- CHOICE entweder einmal <one> oder mind. 2x <two> oder mehr <two> -->
+    <example4> 
+        <two></two>
+        <two></two>
+    </example4> 
+    
+    <!-- CHOICE entweder einmal <one> oder mind. 2x <two> oder mehr <two> -->
+    <example5> 
+        <one></one>
+    </example5>
+    
+    <!-- 1x <one> und 1x <three> in beliebiger Reihenfolge -->
+    <example6> 
+        
+        <three></three>
+        <one></one>
+    </example6>
+    
+    <!-- gemischter Inhalt <four> oder <five> oder nichts-->
+    <example7> 
+        <four></four>
+        <five></five>
+    </example7>
+    
+    <!-- title und number haben "restrictions" title(String) und number(specialValues) -->
+    <example8 title="GOGOGO" number="0"/> 
+    
+    <!-- Attribute (restrictions)  und Elemente als (Sequence) gemischt-->
+    <example9 att1="1" att2="2004-02-29">
+  
+        <foo1>fghfghfgh
+            <foogo>dfdfdfdfd</foogo>fghfghfgh
+            <foogo2>dsdsdsdsd</foogo2>sdsdsd
+        </foo1>
+        
+        <foo2>hfghfghfgh</foo2>
+    </example9>
+    
+    <!-- String mit genau 5 Zeichen in einem Attribut namens go1-->
+    <!-- Dezimalzahl mit genau 2 Nachkommastellen in einem Attribut namens go2-->
+    <example10 go1="asdfg" go2="334.33">
+        <myElement></myElement>
+        <foo1></foo1>
+    </example10>
+       
+    <!-- 3 Listenwerte mit genau 5 Zeichen -->
+    <example11>
+        dfdfd dfdfd dfdff
+    </example11>
+       
+    <!-- Vereinigte Typen muss: ein String mit 5 Zeichen und eine Dezimalzahl mit max. 2 Nachkommstellen -->
+    <example12>
+        dfdfd 34.00
+    </example12> 
+    
+    <example13>EUR 3,12</example13>
+    
+    <example14>3,234 m</example14>
+       
+    
+ 
+</example1>
+

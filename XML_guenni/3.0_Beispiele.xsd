@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    
+<!-- Beispiel0   Element mit ”einfachem“ Inhalt (erlaubt ist jeder einfache oder explizit definierte Datentyp, z.B. xs:time)  -->
+    <xs:element name="example0" type="xs:time"/>
+       
+    <!-- Beispiel1 Element mit beliebigem Inhalt (keine Typfestlegung) -->    
+    <xs:element name="example1">
+        
+    </xs:element>
+    
+    <!-- Beispiel2 Element mit ”komplexem“ Inhalt (es ist eine explizite Definition des komplexen Inhalts notwendig)  -->    
+    <xs:element name="example2">
+        <xs:complexType>
+            
+        </xs:complexType>
+    </xs:element>
+    
+    <!-- Beispiel3 Element-Inhalt (vorgegebene Reihenfolge) -->    
+    <xs:element name="example3">
+        <xs:complexType>
+            <xs:sequence >
+                <xs:element name="one"/>
+                <xs:element name="two" minOccurs="2" maxOccurs="10"/>            
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <!-- Beispiel4 Element- als Auswahl: -->    
+    <xs:element name="example4">
+        <xs:complexType>
+            <xs:choice>
+                <xs:element name="one"/>
+                <xs:element name="two" minOccurs="2" maxOccurs="unbounded"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+    
+    <!-- Beispiel5 Wiederverwendung möglich-->    
+    <xs:element name="two"/> <!-- Wiederverwedung als ref(Referenz) -->
+    <xs:complexType name="myChoice">
+        <xs:choice>
+            <xs:element name="one"/>
+            <xs:element ref="two" minOccurs="2" maxOccurs="unbounded"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:element name="example5" type="myChoice"/>
+    
+    <!-- Beispiel6 oder alle Elemente, aber in beliebiger Reihenfolge -->
+    <xs:element name="one"/>
+    <xs:element name="three"/>
+    
+    <xs:element name="example6">
+        <xs:complexType>
+            <xs:all>
+                <xs:element ref="one"/>
+                <xs:element ref="three"/>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+    
+    <!-- Beispiel7 Wiederverwenudng - Gemischter Element-Inhalt -->    
+    <xs:element name="four"/>
+    <xs:element name="five"/>
+    
+    <xs:element name="example7">
+        <xs:complexType mixed="true">
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="four"/>
+                <xs:element ref="five"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+
+    
+    <!-- Beispiel8 Attribut-Deklaration-->       
+    <xs:element name="example8">
+        <xs:complexType>
+            <xs:attribute name="title" type="xs:string"/>
+            <xs:attribute name="number" type="specialValues"/>
+        </xs:complexType>
+    </xs:element>
+   
+    <xs:simpleType name="specialValues">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="3"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    
+    <!-- Beipsoiel9 -->
+    <!-- Innerhalb eines xs:complexType-Elements können sowohl Attribute als auch enthaltene Unterelemente deklariert werden. -->
+    <xs:element name="example9">
+    <xs:complexType>
+        <xs:sequence >
+            <xs:element name="foo1" type="go" />
+            <xs:element name="foo2" />
+        </xs:sequence>
+        <xs:attribute name="att1" type="xs:integer"/>
+        <xs:attribute name="att2" type="xs:date"/>
+    </xs:complexType>
+    </xs:element>
+    
+    <xs:complexType name="go" mixed="true">
+        <xs:sequence>
+            <xs:element name="foogo" type="xs:string"/>
+            <xs:element name="foogo2" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    <!-- Beispiel10 Beispiele der Anwendung von Facetten -->
+    <!-- String mit genau fünf Zeichen: -->
+    <!-- Dezimalzahl mit max. 2 Nachkommastellen: -->
+    
+    <xs:element name="example10">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="myElement"/>
+                <xs:element name="foo1"/>    
+            </xs:sequence>
+         <xs:attribute name="go1" type="fixedString1"/>
+         <xs:attribute name="go2" type="maxTwoFractions"/>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:simpleType name="fixedString1">
+        <xs:restriction base="xs:string">
+            <xs:length value="5"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="maxTwoFractions">
+        <xs:restriction base="xs:decimal">
+            <xs:fractionDigits value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    
+    
+    <!-- Beispiel11 Werteliste als neuer Datentyp -->
+    <xs:simpleType name="fixedString">
+        <xs:restriction base="xs:string">
+            <xs:length value="5"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Liste mit Zeichenketten der Laenge 5 -->
+    <xs:simpleType name="fixedStringList">
+        <xs:list itemType="fixedString"/>
+    </xs:simpleType>
+    
+    <!-- obige Liste mit genau 3 Elementen -->
+    <xs:simpleType name="fixedStringFixedList">
+        <xs:restriction base="fixedStringList">
+            <xs:length value="3"/>
+            
+        </xs:restriction>
+        
+    </xs:simpleType>
+    
+    <xs:element name="example11" type="fixedStringFixedList"/>
+
+    <!-- Beispiel12 Vereinigung von Basistypen -->
+    <!-- SimpleTypes aus Beispiel 10 werden genutzt -->
+
+    <xs:simpleType name="myUnion">
+        <xs:union memberTypes="fixedString maxTwoFractions"/>
+    </xs:simpleType>
+    <xs:simpleType name="myUnionList">
+        <xs:list itemType="myUnion"/>
+    </xs:simpleType>
+    
+    <xs:element name="example12" type="myUnionList"/>
+
+    <!-- Beispiel13 Typdeklaration mithilfe regulärer Ausdrücke -->
+    <xs:simpleType name="myPrice">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(EUR |USD |\p{Sc} [0-9]+,[0-9]{2})"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:element name="example13" type="myPrice"/>
+ 
+    <xs:simpleType name="distance">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="([0-9]+,[0-9]{3}[ ]m|km)"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:element name="example14" type="distance"/>
+ 
+ <!--
+ a) Definieren Sie mithilfe regul¨arer Ausdr¨ucke einen XML-Datentyp distance, in dem Entfernungsangaben
+ gespeichert werden k¨onnen.
+ Die Entfernungsangaben bestehen aus je einem Zahlenwert mit bis zu drei Nachkommastellen
+ gefolgt von genau einem Leerzeichen und der anschließenden Einheit m oder km.
+ Bei dem Zahlenwert sollen keine redundanten f¨uhrenden Nullen zugelassen sein!
+ Erlaubte Angaben sind z.
+ 
+ 
+ -->
+</xs:schema> 
+
+

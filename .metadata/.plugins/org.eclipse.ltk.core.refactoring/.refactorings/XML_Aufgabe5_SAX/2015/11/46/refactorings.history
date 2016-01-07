@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Encapsulate field &apos;Person.isChild&apos; in &apos;Person&apos;&#x0D;&#x0A;- Original project: &apos;XML_Aufgabe5&apos;&#x0D;&#x0A;- Original element: &apos;Person.isChild&apos;&#x0D;&#x0A;- Getter method name: &apos;getIsChild&apos;&#x0D;&#x0A;- Setter method name: &apos;setIsChild&apos;&#x0D;&#x0A;- Field visibility: &apos;public&apos;&#x0D;&#x0A;- Use getter and setter methods in declaring type" comments="false" declaring="true" description="Encapsulate field &apos;isChild&apos;" flags="589830" getter="getIsChild" id="org.eclipse.jdt.ui.self.encapsulate" input="/src&lt;{aufg5.java[Person^isChild" insertion="9" setter="setIsChild" stamp="1447506291229" version="1.0" visibility="1"/>
+</session>

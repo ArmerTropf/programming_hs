@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;4.1_persons.xml&apos; to &apos;XML_guenni&apos;&#x0D;&#x0A;- Original project: &apos;XML_guenni&apos;&#x0D;&#x0A;- Destination element: &apos;XML_guenni&apos;&#x0D;&#x0A;- Original element: &apos;4.1_persons.xml&apos;" description="Copy file" element1="4.1_persons.xml" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1447789896131" target="/XML_guenni" units="0" version="1.0"/>
+</session>

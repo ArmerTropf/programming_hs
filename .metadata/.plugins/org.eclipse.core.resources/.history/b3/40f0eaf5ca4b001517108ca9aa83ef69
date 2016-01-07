@@ -1,0 +1,60 @@
+import SingleList.ListElem;
+
+
+public class elementklassen 
+{
+	public static void main(String[]args)
+	{
+		
+		SingleList <Integer> bums = new SingleList<Integer>();
+		
+		bums.add(2);
+		bums.add(55);
+		
+		
+	}
+	
+	
+
+}
+
+class SingleList <T>
+{
+	
+	int test;
+	
+	private ListElem m_Next;
+	private T m_Elem;
+	private ListElem m_Head;
+	
+	
+	SingleList()
+	{
+		m_Head = null;
+	}
+	
+	public void add(T obj) 
+	{
+		m_Head = new ListElem(obj, m_Head);
+	}
+	
+	
+	class ListElem
+	{
+		public ListElem(T obj, ListElem next)
+		{
+			m_Next = next;
+			m_Elem = obj;
+		}
+		
+		void ausgabe()
+		{
+			System.out.println("test");
+		}
+		
+	}
+
+}
+
+
+

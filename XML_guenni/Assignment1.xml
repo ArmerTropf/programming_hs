@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="Stylesheet.xsl"?>
+<Hochschule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="Schema.xsd">
+   <Labor Raumnummer="Z2301" Name="Labor01">
+      <Computer Name="Rechner01">
+         <Betriebssystem>Windows 7</Betriebssystem>
+         <Beschaffungsdatum>2010-01-01</Beschaffungsdatum>
+         <Erweiterung>
+            <Beschreibung>2. Festplatte von
+               <Hersteller>Seagate</Hersteller>
+            </Beschreibung>
+         </Erweiterung>
+         <Erweiterung>
+            <Beschreibung>3. Festplatte von
+               <Hersteller>WD</Hersteller>
+            </Beschreibung>
+         </Erweiterung>
+         <Software refID="Office2007"/>
+         <Beschreibung>Rechner von
+            <Hersteller>Aldi</Hersteller>
+         </Beschreibung>
+         <Besonderheiten>Gehäuse stark beschädigt</Besonderheiten>
+      </Computer>
+      <Computer Name="Rechner02">
+         <Betriebssystem>Windows 8</Betriebssystem>
+         <Beschaffungsdatum>2012-01-01</Beschaffungsdatum>
+         <Erweiterung>
+            <Beschreibung>4GB zusätzlicher RAM von
+               <Hersteller>Samsung</Hersteller>
+            </Beschreibung>
+         </Erweiterung>
+         <Software refID="Office2007"/>
+         <Software refID="PhotoshopCS5"/>
+         <Beschreibung>Rechner von
+            <Hersteller>Media-Markt</Hersteller>
+         </Beschreibung>
+         <Besonderheiten>Motherboard wurde bereis mehrfach getauscht</Besonderheiten>
+      </Computer>
+      <Computer Name="Rechner03">
+         <Betriebssystem>Windows 10</Betriebssystem>
+         <Beschaffungsdatum>2014-01-01</Beschaffungsdatum>
+         <Erweiterung>
+            <Beschreibung>zusätzliche Graphikkarte von
+               <Hersteller>Gigabyte</Hersteller>
+            </Beschreibung>
+         </Erweiterung>
+         <Software refID="Office2007"/>
+         <Software refID="PhotoshopCS5"/>
+         <Software refID="Office365"/>
+         <Beschreibung> Rechner von
+            <Hersteller>Real</Hersteller>
+         </Beschreibung>
+      </Computer>
+      <Drucker>
+         <Name>DeskJet</Name>
+         <Beschaffungsdatum>2011-01-01</Beschaffungsdatum>
+         <Beschreibung>Drucker von
+            <Hersteller>HP</Hersteller>
+         </Beschreibung>
+      </Drucker>
+      
+   </Labor>
+   
+   <Labor Raumnummer="Z2302" Name="Labor02">
+      <Computer Name="Rechner04">
+         <Betriebssystem>Windows 10</Betriebssystem>
+         <Beschaffungsdatum>2014-01-01</Beschaffungsdatum>
+         <Erweiterung>
+            <Beschreibung>zusätzliche SSD von
+               <Hersteller>Samsung</Hersteller>
+            </Beschreibung>
+         </Erweiterung>
+         <Software refID="Office2007"/>
+         <Software refID="PhotoshopCS5"/>
+         <Software refID="Office365"/>
+         <Beschreibung> Rechner von
+            <Hersteller>Real</Hersteller>
+         </Beschreibung>
+      </Computer>
+   </Labor>
+   <Labor Raumnummer="u" Name="f">
+      <Computer Name="h">
+         <Betriebssystem></Betriebssystem>
+         <Beschaffungsdatum>2011-11-11</Beschaffungsdatum>
+         <Beschreibung>
+            <Hersteller></Hersteller>
+         </Beschreibung>
+      </Computer>
+   </Labor>
+   <Labor Raumnummer="g" Name="">
+      <Computer Name="v">
+         <Betriebssystem></Betriebssystem>
+         <Beschaffungsdatum>2010-11-11</Beschaffungsdatum>
+         <Beschreibung>
+            <Hersteller></Hersteller>
+         </Beschreibung>
+      </Computer>
+   </Labor>
+   
+   
+   
+   <Software ID="Office2007">
+      <Name>Microsoft Office 2007</Name>
+      <Beschreibung>
+         Software von
+         <Hersteller>Microsoft</Hersteller>
+      </Beschreibung>
+      <Besonderheiten></Besonderheiten>
+   </Software>
+   
+   <Software ID="Office2010">
+      <Name>Microsoft Office 2010</Name>
+      <Beschreibung>
+         <Hersteller>Microsoft</Hersteller>
+      </Beschreibung>
+   </Software>
+   
+   <Software ID="Office365"> 
+      <Name>Microsoft Office 365</Name>
+      <Beschreibung>
+         <Hersteller>Microsoft</Hersteller>
+      </Beschreibung>
+   </Software>
+   
+   <Software ID="PhotoshopCS5">
+      <Name>Photoshop CS5</Name>
+      <Beschreibung>Test
+         <Hersteller>Adobe</Hersteller>
+      </Beschreibung>
+      <Besonderheiten>Fntgmgj</Besonderheiten>
+   </Software>
+   
+</Hochschule>

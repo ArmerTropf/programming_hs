@@ -1,0 +1,118 @@
+import java.awt.Dimension;
+import java.awt.Point;
+
+
+
+public class MySelection 
+{
+	private Point pointSelectionFirst;
+	private Point pointSelectionSecond;	
+	private int[] copiedArea = null;
+	private int copiedAreaScan = 0;
+
+	private Dimension dimSelection = new Dimension(); 
+	
+
+	public boolean boolSelectionSet = false;
+	
+	public MySelection(Point firstPoint , Point secondPoint) 
+	{
+		pointSelectionFirst = new Point(firstPoint);
+		pointSelectionSecond = new Point(secondPoint);
+		setDimensionForSelection();
+	}
+	
+	public MySelection() 
+	{
+		this(new Point(0, 0), new Point(0, 0));		
+	}
+	
+	public Point getPointSelectionFirst() {
+		return pointSelectionFirst;
+	}
+
+	public void setPointSelectionFirst(Point pointSelectionFirst) {
+		this.pointSelectionFirst = pointSelectionFirst;
+	}
+
+	public Point getPointSelectionSecond() {
+		return pointSelectionSecond;
+	}
+
+	public void setPointSelectionSecond(Point pointSelectionSecond) {
+		this.pointSelectionSecond = pointSelectionSecond;
+	}
+	
+	public Dimension getDimSelection() {
+		return dimSelection;
+	}
+
+	public void setDimSelection(Dimension dimSelection) {
+		this.dimSelection = dimSelection;
+	}
+		
+	public boolean isPointInSelection(Point Click)
+	{
+
+		if  (Click.getX() >= pointSelectionFirst.x && Click.getX() <= pointSelectionSecond.x  && Click.getY() >= pointSelectionFirst.y && Click.getY() <= pointSelectionSecond.y)
+			return true;
+		else 
+			return false;
+	}
+	
+	public void setDimensionForSelection()
+	{
+		
+		dimSelection.setSize(pointSelectionSecond.x-pointSelectionFirst.x, pointSelectionSecond.y-pointSelectionFirst.y);	 
+		boolSelectionSet = true;
+	}
+
+	public void copySelection(int[] arr, int h, int w) {
+		final int x1 = pointSelectionFirst.x;
+		final int y1 = pointSelectionFirst.y;
+		final int x2 = pointSelectionSecond.x;
+		final int y2 = pointSelectionSecond.y;
+
+		final int w_n = (x2-x1);
+        final int h_n = (y2-y1);
+        copiedArea = new int[w_n*h_n];
+        
+        //final int h = arr.length/w;
+        for (int x = 0; x < w; x++) {
+            for (int y = 0; y < h; y++) {
+                if(x >= x1 && x < x2 && y >= y1 && y < y2) {
+                    copiedArea[(y-y1)*w_n+(x-x1)] = arr[y*w+x];
+                    // if (delete)
+                        // arr[y*w+x] = 0xFF000000;
+                }
+            }
+        }
+	}
+
+	public int[] PasteSelection(int[] arr, int h_t, int w_t) {
+		final int x1 = pointSelectionFirst.x;
+		final int y1 = pointSelectionFirst.y;
+		
+		
+		
+		final int w_a = copiedAreaScan;
+        final int h_a = copiedArea.length / copiedAreaScan;
+        
+		final int offx = x1+w_a;
+        final int offy = y1+h_a;
+
+        int[] trg = new int[h_t*w_t];
+        for (int x = 0; x < w_t; x++) {
+            for (int y = 0; y < h_t; y++) {
+                if(x > x1 && x < offx && y > y1 && y < offy) {
+                    trg[y*w_t+x] = copiedArea[(y-y1)*w_a+(x-x1)];
+                } else {
+                    trg[y*w_t+x] = arr[y*w_t+x];
+                }
+            }
+        }
+
+        return arr;
+	}
+
+}

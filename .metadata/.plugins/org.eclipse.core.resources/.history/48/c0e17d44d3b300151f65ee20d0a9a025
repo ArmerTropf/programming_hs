@@ -1,0 +1,48 @@
+import java.util.TreeMap;
+
+
+public class start 
+{
+	public static void main(String[]args)
+	{
+		
+		RedBlackTree<Integer, Integer> RB = new RedBlackTree<>();
+		
+		RB.insert(20, 20);
+		RB.insert(25, 25);
+		RB.insert(5, 5);
+		RB.insert(30, 30);
+		RB.insert(3, 3);
+		RB.insert(29, 29);
+		RB.insert(7, 7);
+		
+		goDownTree(RB.m_Root);
+		
+		
+		
+		
+		
+		
+		System.out.println();
+	
+		
+		
+		PTree go = new PTree();
+		
+		System.out.println();
+
+		
+	}
+	
+	
+	public static void goDownTree(RedBlackTree.Node go)
+	{
+		if (go.m_Left != null )
+			goDownTree(go.m_Left);
+		System.out.println(go.m_Data);
+		if (go.m_Right != null )
+			goDownTree(go.m_Right);
+
+	}
+
+}

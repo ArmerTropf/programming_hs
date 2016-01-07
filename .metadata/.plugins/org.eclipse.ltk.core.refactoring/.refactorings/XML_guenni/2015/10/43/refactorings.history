@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;XML_guenni/persons.xml&apos; to &apos;4.1_persons.xml&apos;" description="Rename resource &apos;persons.xml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="persons.xml" name="4.1_persons.xml" stamp="1445687416224" updateReferences="true"/>
+</session>

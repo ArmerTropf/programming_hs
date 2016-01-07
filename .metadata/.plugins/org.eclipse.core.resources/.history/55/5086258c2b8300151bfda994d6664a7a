@@ -1,0 +1,344 @@
+import javax.swing.*;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Vector;
+
+
+
+public class myAssignment 
+{
+	public static void main(String[]args)
+	{
+		View_assignment _view = new View_assignment();
+	}
+}
+
+class View_assignment extends JFrame 
+{
+	View_assignment _this = this;
+	Dimension dimWindowSize = new Dimension(604,830);
+
+	JPanel JPanel_upper = new JPanel(true);
+	JPanel JPanel_lower = new JPanel(true);
+	JPanel JPanel_adjustments = new JPanel(true);
+	
+	JSplitPane JSplitPane_mySplit1;
+	
+	MyPresentationLayer MyPresentationLayer_TmpPic4View;
+	
+	JLabel nb1 = new JLabel("X");
+	JTextField jTextFieldX = new JTextField("40");
+	JLabel nb2 = new JLabel("Y");
+	JTextField jTextFieldY = new JTextField("40");
+	JButton nb3 = new JButton("go");
+	
+	//Standardgrößen festlegen
+	Dimension aBig1 = new Dimension(600,500);
+	Dimension aPrev1 = new Dimension(200,200);
+	
+	
+	
+	boolean boolSelectionSet = false;
+	
+	//Für die Bilderauswahl NICHT FERTIG
+	Image [] imageArr = new Image [500];
+	int intimageArrCounter = 0;
+	
+	Vector <Image> vecFadingImages = new Vector<Image>(1,0);
+	//--
+		
+	//Vector für alle eingelesenen Bilder
+	Vector<MyPicture> vecMyPictures = new Vector<MyPicture>(1,1);
+	public View_assignment() 
+	{
+		super("Assignment 1");
+		
+
+		
+		setSize((int)dimWindowSize.getWidth(),(int)dimWindowSize.getHeight());
+		BorderLayout myBorder = new BorderLayout();
+		myBorder.getLayoutAlignmentX(this);
+		myBorder.getLayoutAlignmentY(this);
+		setLayout(myBorder);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
+		//--> Menu
+		JMenuBar JMenuBar_myMenubar = new JMenuBar();
+		JMenu JMenu_myMenu_File = new JMenu("Datei");
+		
+		JMenuItem JMenuItem_OpenFile = new JMenuItem("Open File");
+		JMenuItem_OpenFile.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(JSplitPane_mySplit1.getSize(getSize()));
+				
+			}
+		});
+		JMenuItem JMenuItem_CloseProgram = new JMenuItem("Close Program");
+		JMenuItem_CloseProgram.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				dispose();
+			}
+		});
+		JSeparator JSep_mySep1 = new JSeparator(JSeparator.HORIZONTAL);
+		
+		JMenu JMenu_myMenu_Edit = new JMenu("Bearbeiten");
+		JMenuItem JMenuItem_cut = new JMenuItem("ausschneiden");
+		JMenuItem JMenuItem_copy = new JMenuItem("kopieren");
+		JMenuItem_copy.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				MyPresentationLayer_TmpPic4View.mySelection.copySelection(MyPresentationLayer_TmpPic4View.intArrImgShowThisImage, 600, 500);
+				
+				MyPresentationLayer_TmpPic4View.imgShowThisImage = MyPresentationLayer_TmpPic4View.mySelection.getImageFromArray(MyPresentationLayer_TmpPic4View.mySelection.copiedArea, 500, 600);
+			}
+		});
+		JMenuItem JMenuItem_paste = new JMenuItem("einfügen");
+		
+		
+		JMenu JMenu_myMenu_DiaShow = new JMenu("DiaShow");
+		JMenuItem JMenuItem_start = new JMenuItem("start DiaShow");
+		JMenuItem_start.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				System.out.println("DiaShow");
+				vecFadingImages.removeAll(vecFadingImages);
+				
+				for (int i = 0 ; i < 20 ; i++)
+				{
+					System.out.println(imageArr[i]);
+					if ( imageArr[i] != null)
+						vecFadingImages.addElement(imageArr[i]);
+				}
+// TODO GEHT NIX
+				MyImageFade imageFade = new MyImageFade(vecFadingImages, _this );
+		
+			}
+		});
+		
+		JMenu JMenu_myMenu_Morphing = new JMenu("Morph");		
+		
+		JCheckBoxMenuItem JCheckBoxMenuItem_Move = new JCheckBoxMenuItem("Verschieben");
+		JCheckBoxMenuItem JCheckBoxMenuItem_BigSmall  = new JCheckBoxMenuItem("Vergroessern/Verkleinern");
+		JCheckBoxMenuItem JCheckBoxMenuItem_Rotate  = new JCheckBoxMenuItem("Rotieren");
+		JCheckBoxMenuItem JCheckBoxMenuItem_Shear  = new JCheckBoxMenuItem("Scheren");
+		
+		
+		
+		JCheckBoxMenuItem_Move.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				JCheckBoxMenuItem_Shear.setSelected(false);
+				JCheckBoxMenuItem_BigSmall.setSelected(false);
+				JCheckBoxMenuItem_Rotate.setSelected(false);
+				
+			}
+		});
+		
+		JCheckBoxMenuItem_BigSmall.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				JCheckBoxMenuItem_Move.setSelected(false);
+				JCheckBoxMenuItem_Rotate.setSelected(false);
+				JCheckBoxMenuItem_Shear.setSelected(false);
+				
+			}
+		});
+		
+		JCheckBoxMenuItem_Rotate.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				JCheckBoxMenuItem_Move.setSelected(false);
+				JCheckBoxMenuItem_BigSmall.setSelected(false);
+				JCheckBoxMenuItem_Shear.setSelected(false);
+				
+			}
+		});
+		
+		JCheckBoxMenuItem_Shear.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				JCheckBoxMenuItem_Move.setSelected(false);
+				JCheckBoxMenuItem_BigSmall.setSelected(false);
+				JCheckBoxMenuItem_Rotate.setSelected(false);
+				
+			}
+		});
+		
+		JMenu JMenu_myMenu_Histogram = new JMenu("Histotgramm");
+		JMenuItem JMenuItem_histogramShow = new JMenuItem("zeige Histogramm");
+		JMenuItem_histogramShow.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				MyHistogram myHistogram = new MyHistogram(MyPresentationLayer_TmpPic4View);
+			}
+		});
+		
+		JMenu JMenu_myMenu_AccepttoCallerImage = new JMenu("Übernehmen");
+		JMenuItem JMenuItem_accept = new JMenuItem("Auf Bild Übernehmen");
+		JMenuItem_accept.addActionListener(new ActionListener() {
+//// GEEEHT NICHT			
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				MyPresentationLayer_TmpPic4View.setEditedImageToCallerImage();
+			}
+		});
+		
+		
+		
+		JMenu_myMenu_File.add(JMenuItem_OpenFile);
+		JMenu_myMenu_File.add(JSep_mySep1);
+		JMenu_myMenu_File.add(JMenuItem_CloseProgram);
+		
+		JMenu_myMenu_Edit.add(JMenuItem_cut);
+		JMenu_myMenu_Edit.add(JMenuItem_copy);
+		
+		JMenu_myMenu_Edit.add(JMenuItem_paste);
+		
+		JMenu_myMenu_DiaShow.add(JMenu_myMenu_DiaShow);
+		JMenu_myMenu_DiaShow.add(JMenuItem_start);
+		
+		JMenu_myMenu_Morphing.add(JCheckBoxMenuItem_BigSmall);
+		JMenu_myMenu_Morphing.add(JCheckBoxMenuItem_Move);
+		JMenu_myMenu_Morphing.add(JCheckBoxMenuItem_Rotate);
+		JMenu_myMenu_Morphing.add(JCheckBoxMenuItem_Shear);
+		
+		JMenu_myMenu_Histogram.add(JMenuItem_histogramShow);
+		
+		JMenu_myMenu_AccepttoCallerImage.add(JMenuItem_accept);
+		
+		JMenuBar_myMenubar.add(JMenu_myMenu_File);
+		JMenuBar_myMenubar.add(JMenu_myMenu_Edit);
+		JMenuBar_myMenubar.add(JMenu_myMenu_DiaShow);
+		JMenuBar_myMenubar.add(JMenu_myMenu_Morphing);
+		JMenuBar_myMenubar.add(JMenu_myMenu_Histogram);
+		JMenuBar_myMenubar.add(JMenu_myMenu_AccepttoCallerImage);
+		setJMenuBar(JMenuBar_myMenubar);
+		// MENU <--
+		
+		// --> JPanel für ober und untere Splitpane 
+		JPanel_upper.setLayout(new BorderLayout());
+		JPanel_lower.setLayout(new FlowLayout());
+		
+		
+		
+		
+		nb3.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				
+				if (JCheckBoxMenuItem_Move.isSelected() == true )
+				{
+					System.out.println("Bewegen");
+					MyImageMorph myImageMorph = new MyImageMorph();
+					MyPresentationLayer_TmpPic4View.intArrImgShowThisImage = myImageMorph.getMovedImageArr(MyPresentationLayer_TmpPic4View.intArrImgShowThisImage, MyPresentationLayer_TmpPic4View.dimImgShowThisImage.width, MyPresentationLayer_TmpPic4View.dimImgShowThisImage.height, Double.parseDouble(jTextFieldX.getText()), Double.parseDouble(jTextFieldY.getText()), MyPresentationLayer_TmpPic4View.mySelection);
+					MyPresentationLayer_TmpPic4View.imgShowThisImage = MyPresentationLayer_TmpPic4View.getImageFromArray(MyPresentationLayer_TmpPic4View.intArrImgShowThisImage, MyPresentationLayer_TmpPic4View.dimImgShowThisImage.width, MyPresentationLayer_TmpPic4View.dimImgShowThisImage.height);
+				
+				}
+				else if (JCheckBoxMenuItem_BigSmall.isSelected() == true )
+				{
+					System.out.println("Vergrößern/Verkleinern");
+					MyImageMorph myImageMorph = new MyImageMorph();
+					MyPresentationLayer_TmpPic4View.intArrImgShowThisImage = myImageMorph.getScaledImageArr(MyPresentationLayer_TmpPic4View.intArrImgShowThisImage, MyPresentationLayer_TmpPic4View.dimImgShowThisImage.width, MyPresentationLayer_TmpPic4View.dimImgShowThisImage.height, Double.parseDouble(jTextFieldX.getText()), Double.parseDouble(jTextFieldY.getText()), MyPresentationLayer_TmpPic4View.mySelection);
+					MyPresentationLayer_TmpPic4View.imgShowThisImage = MyPresentationLayer_TmpPic4View.getImageFromArray(MyPresentationLayer_TmpPic4View.intArrImgShowThisImage, MyPresentationLayer_TmpPic4View.dimImgShowThisImage.width, MyPresentationLayer_TmpPic4View.dimImgShowThisImage.height);
+				
+					
+				}
+				else if (JCheckBoxMenuItem_Rotate.isSelected() == true )
+				{
+					System.out.println("Rotieren");
+					MyImageMorph myImageMorph = new MyImageMorph();
+					MyPresentationLayer_TmpPic4View.intArrImgShowThisImage = myImageMorph.getRotatedImageArr(MyPresentationLayer_TmpPic4View.intArrImgShowThisImage, MyPresentationLayer_TmpPic4View.dimImgShowThisImage.width, MyPresentationLayer_TmpPic4View.dimImgShowThisImage.height, Double.parseDouble(jTextFieldX.getText()), Double.parseDouble(jTextFieldY.getText()), MyPresentationLayer_TmpPic4View.mySelection);
+					MyPresentationLayer_TmpPic4View.imgShowThisImage = MyPresentationLayer_TmpPic4View.getImageFromArray(MyPresentationLayer_TmpPic4View.intArrImgShowThisImage, MyPresentationLayer_TmpPic4View.dimImgShowThisImage.width, MyPresentationLayer_TmpPic4View.dimImgShowThisImage.height);
+					
+					
+				}
+				else if (JCheckBoxMenuItem_Shear.isSelected() == true )
+				{
+					System.out.println("Scheren");
+					MyImageMorph myImageMorph = new MyImageMorph();
+					MyPresentationLayer_TmpPic4View.intArrImgShowThisImage = myImageMorph.getShearedImageArr(MyPresentationLayer_TmpPic4View.intArrImgShowThisImage, MyPresentationLayer_TmpPic4View.dimImgShowThisImage.width, MyPresentationLayer_TmpPic4View.dimImgShowThisImage.height, Double.parseDouble(jTextFieldX.getText()), Double.parseDouble(jTextFieldY.getText()), MyPresentationLayer_TmpPic4View.mySelection);
+					MyPresentationLayer_TmpPic4View.imgShowThisImage = MyPresentationLayer_TmpPic4View.getImageFromArray(MyPresentationLayer_TmpPic4View.intArrImgShowThisImage, MyPresentationLayer_TmpPic4View.dimImgShowThisImage.width, MyPresentationLayer_TmpPic4View.dimImgShowThisImage.height);
+					
+				
+					
+				}
+				
+				repaint();
+				
+			
+			}
+		});
+		
+		
+		
+		JPanel_adjustments.setLayout(new GridLayout(1,5));
+		JPanel_adjustments.setBounds(0, 0, 600, 800);;
+		JPanel_adjustments.add(nb1);
+		JPanel_adjustments.add(jTextFieldX);
+		JPanel_adjustments.add(nb2);
+		JPanel_adjustments.add(jTextFieldY);
+		JPanel_adjustments.add(nb3);
+		// JPanel <--
+		
+		
+		
+		JScrollPane jScrollPane_Upper = new  JScrollPane(JPanel_upper);
+		JScrollPane jScrollPane_Lower = new  JScrollPane(JPanel_lower);
+		
+		// --> JSplitPane: 
+		JSplitPane_mySplit1 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, JPanel_upper, jScrollPane_Lower);
+		JSplitPane_mySplit1.setSize(dimWindowSize);
+		JSplitPane_mySplit1.setDividerLocation(490);
+		// JSplitPane <--
+		
+		//-->
+		add(JPanel_adjustments, BorderLayout.NORTH);
+		add(JSplitPane_mySplit1, BorderLayout.CENTER);
+		
+		
+		
+		vecMyPictures.add(new MyPicture("c:/1.jpg",aBig1.width, aBig1.height, aPrev1.width, aPrev1.height, this));
+		vecMyPictures.add(new MyPicture("c:/2.jpg",aBig1.width, aBig1.height, aPrev1.width, aPrev1.height, this));
+		vecMyPictures.add(new MyPicture("c:/1.jpg",aBig1.width, aBig1.height, aPrev1.width, aPrev1.height, this));
+		vecMyPictures.add(new MyPicture("c:/2.jpg",aBig1.width, aBig1.height, aPrev1.width, aPrev1.height, this));
+		vecMyPictures.add(new MyPicture("c:/1.jpg",aBig1.width, aBig1.height, aPrev1.width, aPrev1.height, this));
+		vecMyPictures.add(new MyPicture("c:/2.jpg",aBig1.width, aBig1.height, aPrev1.width, aPrev1.height, this));
+		vecMyPictures.add(new MyPicture("c:/1.jpg",aBig1.width, aBig1.height, aPrev1.width, aPrev1.height, this));
+		vecMyPictures.add(new MyPicture("c:/2.jpg",aBig1.width, aBig1.height, aPrev1.width, aPrev1.height, this));
+				
+		for (int i = 0 ; i < vecMyPictures.size() ; i++)
+		{
+			MyPreviewLayer myPreviewLayer1 = new MyPreviewLayer(vecMyPictures.get(i).imgShowPrev, vecMyPictures.get(i).dimImgPreview.width, vecMyPictures.get(i).dimImgPreview.height, this, vecMyPictures.get(i));
+		}
+		repaint();
+		
+		setVisible(true);
+		
+
+		
+	}
+	
+
+	
+
+}

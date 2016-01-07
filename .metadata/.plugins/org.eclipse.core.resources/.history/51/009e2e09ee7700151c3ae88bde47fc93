@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wurzel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="3.2a.xsd">
+    
+    <example14>123 m</example14> 
+    <example15>0,567 m</example15>
+    <example16>003,4 m</example16>
+    <example17>0,567 cm</example17>
+    <example18>123,2231 cm</example18> 
+
+</wurzel>

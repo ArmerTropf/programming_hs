@@ -1,0 +1,256 @@
+
+public class RedBlackTrees 
+{
+	
+	public static void main(String[]args)
+	{
+		BlackRedTree<Integer,Integer> go = new BlackRedTree<>();
+		go.insert(15, 15);
+		go.insert(4, 4);
+		go.insert(19, 19);
+		go.insert(17, 17 );
+		go.insert(5, 5 );
+		System.out.println();
+		
+		
+		
+		
+	}
+	
+	
+	public void plott(BlackRedTree.Node go)
+	{
+		
+		if (go.m_Root.m_Left != null)
+		{
+			plott(go.m_Root.m_Left);
+		}
+			
+	}
+}
+
+
+class BlackRedTree<K extends Comparable<K>,D> 
+{
+	public Node m_Root = null;
+	
+	
+	class Node 
+	{
+		public Node(K key,D data) 
+		{
+			m_Key = key;
+			m_Data = data;
+		}
+		
+		K m_Key;
+		D m_Data;
+		public Node m_Left = null;
+		public Node m_Right = null;
+		boolean m_bIsRed = true;
+		
+	
+		public boolean is4Node() 
+		{
+			return m_Left != null && m_Left.m_bIsRed
+			&& m_Right != null && m_Right.m_bIsRed;
+		}
+	
+		void convert4Node() 
+		{
+			m_Left.m_bIsRed = false;
+			m_Right.m_bIsRed = false;
+			m_bIsRed = true;
+		}
+		
+	}
+	
+	class NodeHandler 
+	{
+		public final int NODE = 0;
+		public final int DAD = 1;
+		public final int G_DAD = 2;
+		public final int GG_DAD = 3;
+
+		private Object[] m_Nodes = new Object[4];
+		
+		NodeHandler(Node n) 
+		{
+			m_Nodes[NODE] = n;
+		}
+		
+		void down(boolean left) 
+		{
+			for(int i = m_Nodes.length-1;i >0;--i)
+				m_Nodes[i] = m_Nodes[i-1];
+			m_Nodes[NODE] = left ? node(DAD).m_Left : node(DAD).m_Right;
+		}
+		
+		boolean isNull() 
+		{
+			return m_Nodes[NODE] == null;
+		}
+		
+		Node node(int kind) 
+		{
+			return (Node)m_Nodes[kind];
+		}
+		
+		void set(Node n,int kind) 
+		{
+			if (node(kind+1) == null)
+				m_Root = n;
+			else if (node(kind) != null ?node(kind+1).m_Left == node(kind) :
+					n.m_Key.compareTo(node(kind+1).m_Key) < 0)
+				node(kind+1).m_Left = n;
+			else
+				node(kind+1).m_Right = n;
+			m_Nodes[kind] = n;
+		}
+		
+		void rotate(int kind) 
+		{
+			Node dad = node(kind);
+			Node son = node(kind-1);
+			boolean sonColour = son.m_bIsRed;
+			son.m_bIsRed = dad.m_bIsRed;
+			dad.m_bIsRed = sonColour;
+			// rotate
+			if (dad.m_Left == son) 
+			{
+				// clockwise rotation
+				dad.m_Left = son.m_Right;
+				son.m_Right = dad;
+			} 
+			else 
+			{
+				// counter-clockwise rotation
+				dad.m_Right = son.m_Left;
+				son.m_Left = dad;
+			}
+			set(son,kind);
+		}
+		
+		boolean insert(K key,D data) 
+		{
+			NodeHandler h = new NodeHandler(m_Root);
+			while (!h.isNull()) 
+			{
+				if (h.node(h.NODE).is4Node()) 
+				{
+					h.node(h.NODE).convert4Node();
+					h.split();
+				}
+				final int RES = key.compareTo(h.node(h.NODE).m_Key);
+				if (RES == 0)
+					return false;
+				h.down(RES < 0);
+			}
+			h.set(new Node(key,data),h.NODE);
+			h.split();
+			m_Root.m_bIsRed = false;
+			return true;
+		}
+				
+		private void split() 
+		{
+			Node dad = node(DAD);
+			if (dad != null && dad.m_bIsRed) 
+			{
+				if (node(G_DAD).m_Key.compareTo(dad.m_Key) < 0 !=
+						dad.m_Key.compareTo(node(NODE).m_Key) < 0)
+					rotate(DAD);
+				rotate(G_DAD);
+			}
+		}
+	}
+	
+	
+	public Node search(K key) 
+	{
+		Node tmp = m_Root;
+		while (tmp != null) 
+		{
+			final int RES = key.compareTo(tmp.m_Key);
+			if (RES == 0)
+				return tmp;
+			tmp = RES < 0 ? tmp.m_Left : tmp.m_Right;
+		}
+		return null;
+	}
+	
+//	boolean insert(K key,D data) 
+//	{
+//		NodeHandler h = new NodeHandler(m_Root);
+//		while (!h.isNull()) 
+//		{
+//			if (h.node().is4Node()) 
+//			{
+//				h.node().convert4Node();
+//			}
+//			
+//			final int RES = key.compareTo(h.node().m_Key);
+//			if (RES == 0)
+//				return false;
+//			h.down(RES < 0);
+//		}
+//		h.set(new Node(key,data));
+//		m_Root.m_bIsRed = false;
+//		return true;
+//	}
+	
+	public boolean insert(K key, D data) 
+	{
+		NodeHandler h = new NodeHandler(m_Root);
+		while (!h.isNull()) 
+		{
+			if (h.node(h.NODE).is4Node()) 
+			{
+				h.node(h.NODE).convert4Node();
+				h.split();
+			}
+			final int RES = key.compareTo(h.node(h.NODE).m_Key);
+			if (RES == 0)
+				return false;
+			h.down(RES < 0);
+		}
+		h.set(new Node(key, data), h.NODE);
+		h.split();
+		m_Root.m_bIsRed = false;
+		return true;
+	}
+	
+	
+	
+	void rotate(Node dad,Node node) 
+	{
+		boolean nodeColour = node.m_bIsRed;
+		node.m_bIsRed = dad.m_bIsRed;
+		dad.m_bIsRed = nodeColour;
+		if (dad.m_Left == node) 
+		{
+			// clockwise rotation
+			dad.m_Left = node.m_Right;
+			node.m_Right = dad;
+		} 
+		else 
+		{
+			// counter-clockwise rotation
+			dad.m_Right = node.m_Left;
+			node.m_Left = dad;
+		}
+		// ???? wer merkt sich den neuen Vater????
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
+	
+
+	

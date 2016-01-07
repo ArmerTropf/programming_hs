@@ -1,0 +1,59 @@
+import java.awt.*;
+import java.awt.image.*;
+import java.util.*;
+
+import javax.swing.JFrame;
+
+
+public class Histogram 
+{
+//	public Histogram(Picture myPicture)
+	Histogram(PresentationImage myPicture)
+	{
+		
+		//Hashmap für das Datenpaar von Pixelfarbe und die Anzahl wie oft diese Pixelfarbe vorkommt	
+		//Farbwert des Pixels	Anahl vorkommend
+		//Integer=-54345344 	Integer=27
+		HashMap<Integer, Integer> hashmapPixelPointColorCount = new HashMap<Integer, Integer>();
+		
+		ImageActions imageActions = new ImageActions();
+		
+		int [] myArrayMAP = new int[imageActions.getPixelMap(myPicture.imgShowThisImage).length];
+		myArrayMAP = imageActions.getPixelMap(myPicture.imgShowThisImage);
+
+		
+		for (int i = 0 ; i < myArrayMAP.length ; i++)
+		{
+			
+			if (hashmapPixelPointColorCount.size() == 0)
+			{
+				hashmapPixelPointColorCount.put(myArrayMAP[i], new Integer(0));
+			}
+			else
+			{
+				if (hashmapPixelPointColorCount.get(myArrayMAP[i]) != null)
+					hashmapPixelPointColorCount.put(myArrayMAP[i], hashmapPixelPointColorCount.get(myArrayMAP[i]).intValue()+1);
+				else
+					hashmapPixelPointColorCount.put(myArrayMAP[i], new Integer(1));
+			}
+		}
+
+		for(HashMap.Entry<Integer, Integer> e : hashmapPixelPointColorCount.entrySet())
+		{	  
+			
+			if (e.getValue() > 0)
+			{
+				int alpha = (e.getKey() >> 24) & 0xff;
+				int red   = (e.getKey() >> 16) & 0xff;
+				int green = (e.getKey() >>  8) & 0xff;
+				int blue  = (e.getKey()      ) & 0xff;
+				System.out.println(e.getKey() + "  " + e.getValue() + "   Rot: " + red + " Grün: " + green + " Blau: " + blue ); 
+			}
+		}
+
+		
+		
+	}
+	
+
+}

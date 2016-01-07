@@ -1,0 +1,5 @@
+INDEX VERSION 1.127+C:\Users\Michael\Dropbox\Studium\Prog 1 - Kelb\Projekte\.metadata\.plugins\org.eclipse.jdt.core
+1041817492.index
+2983621361.index
+520745065.index
+2939658197.index

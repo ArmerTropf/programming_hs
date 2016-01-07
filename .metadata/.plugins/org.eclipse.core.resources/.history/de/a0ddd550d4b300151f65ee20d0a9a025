@@ -1,0 +1,4 @@
+public interface Node<K extends Comparable<K>, V> {
+    K getKey();
+    V getValue();
+}

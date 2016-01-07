@@ -1,0 +1,32 @@
+import java.util.TreeMap;
+
+
+public class start 
+{
+	public static void main(String[]args)
+	{
+		
+		RedBlackTree<Integer, Integer> RB = new RedBlackTree<>();
+		
+		RB.insert(19, 19);
+		RB.insert(20, 20);
+		RB.insert(21, 21);
+		
+		
+		System.out.println();
+		
+		TreeMap<Integer, Integer> test = new TreeMap<Integer, Integer>();
+		
+		test.put(20, 20);
+		test.put(21, 21);
+		test.put(5, 5);
+		
+		
+		PTree go = new PTree();
+		
+		System.out.println();
+
+		
+	}
+
+}

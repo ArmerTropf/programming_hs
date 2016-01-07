@@ -1,0 +1,46 @@
+import java.awt.*;
+import javax.swing.*;
+
+
+
+public class mySMenu  
+{
+	
+	public static void main(String[]args)
+	{
+		View myMenu = new View("Meine kleines Fenster");
+		myMenu.paint(g, 400);
+		
+	}
+
+}
+
+class View extends JFrame
+{
+	View(String myFramename)
+	{
+				
+		super(myFramename);
+		View test = this; 
+		
+		
+		setSize(800,800);
+		setVisible(true);
+		
+		JMenuBar myJMenuBar = new JMenuBar();
+		JMenu myJMenu = new JMenu("Test");
+		JMenuItem myJMenuItem = new JMenuItem("Fuc");
+		
+		myJMenuBar.add(myJMenu);
+		myJMenu.add(myJMenuItem);
+		setJMenuBar(myJMenuBar);
+	}
+	
+	public void paint(Graphics g, int go)
+	{
+		g.drawLine(200, 200, go, go);
+	}
+	
+}
+
+

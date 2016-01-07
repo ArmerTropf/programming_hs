@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    
+    
+    <xs:simpleType name="distance">
+        <xs:restriction base="xs:string">
+     <!-- ALT       <xs:pattern value="(([0-9])*[,]?[0-9]{1}[ ][m]|[km])"/> -->
+            <xs:pattern value="(0|([1-9][0-9]{0,2}(.[0-9]{3})*))([,][0-9]{1,3})?( [m]|[km])"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="wurzel"/>
+    <xs:element name="example14" type="distance"/>
+    <xs:element name="example15" type="distance"/>
+    <xs:element name="example16" type="distance"/>
+    <xs:element name="example17" type="distance"/>
+    <xs:element name="example18" type="distance"/>
+ 
+ <!--
+b) Modifizieren Sie Ihren Datentyp distance aus dem Aufgabenteil a so, dass der Zahlenwert vor
+dem Komma in Tausendergruppen durch einen Punkt gegliedert wird (Beispiel: 1.234,2 km oder 1.234.000,2 m).
+ -->
+</xs:schema>

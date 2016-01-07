@@ -1,0 +1,253 @@
+import javax.swing.*;
+
+import java.awt.*;
+import java.awt.event.*;
+
+
+public class myAssignment 
+{
+	public static void main(String[]args)
+	{
+		View_assignment _view = new View_assignment();
+	}
+}
+
+class View_assignment extends JFrame implements MouseListener,MouseMotionListener
+{
+	Dimension dimWindowSize = new Dimension(604,800);
+	final Insets INSETS = getInsets();
+	
+	JPanel JPanel_upper = new JPanel(true);
+	JPanel JPanel_lower = new JPanel(true);
+	JPanel JPanel_MoprhSettings = new JPanel(true);
+	JSplitPane JSplitPane_mySplit1;
+	
+	MyPicture MyPicture_TmpPic4View;
+	
+	
+	Dimension aBig1 = new Dimension(600,500);
+	Dimension aPrev1 = new Dimension(200,200);
+	
+	//Für das Auswahlfeld um zu morphen
+	Point click1 = new Point();
+	Point click2 = new Point();
+	
+	public View_assignment() 
+	{
+		super("Assignment 1");
+		
+		
+		setSize((int)dimWindowSize.getWidth(),(int)dimWindowSize.getHeight());
+		setLayout(new BorderLayout());
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
+		//--> Menu
+		JMenuBar JMenuBar_myMenubar = new JMenuBar();
+		JMenu JMenu_myMenu_File = new JMenu("File");
+		
+		JMenuItem JMenuItem_OpenFile = new JMenuItem("Open File");
+		JMenuItem_OpenFile.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(JSplitPane_mySplit1.getSize(getSize()));
+				
+			}
+		});
+		JMenuItem JMenuItem_CloseProgram = new JMenuItem("Close Program");
+		JMenuItem_CloseProgram.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				dispose();
+			}
+		});
+		JSeparator JSep_mySep1 = new JSeparator(JSeparator.HORIZONTAL);
+		JMenu JMenu_myMenu_DiaShow = new JMenu("DiaShow");
+		JMenuItem JMenuItem_start = new JMenuItem("start DiaShow");
+		
+		JMenu JMenu_myMenu_Morphing = new JMenu("Morph");	
+		JMenuItem JMenuItem_zoomin = new JMenuItem("vergrössern");
+		JMenuItem_zoomin.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				System.out.println("Vergrößern");
+				MyImageMorph myImageMorph = new MyImageMorph();
+				MyPicture_TmpPic4View.intArrImgShowBig = myImageMorph.getScaledImage(MyPicture_TmpPic4View.intArrImgShowBig, MyPicture_TmpPic4View.dimImgShowBig.width, MyPicture_TmpPic4View.dimImgShowBig.height, 1.1, 1.1);
+				MyPicture_TmpPic4View.imgShowThisImage = myImageMorph.getImageFromArray(MyPicture_TmpPic4View.intArrImgShowBig, MyPicture_TmpPic4View.dimImgShowBig.width, MyPicture_TmpPic4View.dimImgShowBig.height);
+				repaint();
+			}
+		});
+		JMenuItem JMenuItem_zoomout = new JMenuItem("verkleinern");
+		JMenuItem_zoomout.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				System.out.println("Verkleinern");
+				MyImageMorph myImageMorph = new MyImageMorph();
+				MyPicture_TmpPic4View.intArrImgShowBig = myImageMorph.getScaledImage(MyPicture_TmpPic4View.intArrImgShowBig, MyPicture_TmpPic4View.dimImgShowBig.width, MyPicture_TmpPic4View.dimImgShowBig.height, 0.9, 0.9);
+				MyPicture_TmpPic4View.imgShowThisImage = myImageMorph.getImageFromArray(MyPicture_TmpPic4View.intArrImgShowBig, MyPicture_TmpPic4View.dimImgShowBig.width, MyPicture_TmpPic4View.dimImgShowBig.height);
+				repaint();
+			}
+		});
+		JMenuItem JMenuItem_move = new JMenuItem("verschieben");
+		
+		JMenu_myMenu_File.add(JMenuItem_OpenFile);
+		JMenu_myMenu_File.add(JSep_mySep1);
+		JMenu_myMenu_File.add(JMenuItem_CloseProgram);
+		
+		JMenu_myMenu_DiaShow.add(JMenu_myMenu_DiaShow);
+		JMenu_myMenu_DiaShow.add(JMenuItem_start);
+		
+		JMenu_myMenu_Morphing.add(JMenuItem_zoomin);
+		JMenu_myMenu_Morphing.add(JMenuItem_zoomout);
+		JMenu_myMenu_Morphing.add(JMenuItem_move);
+		
+		
+		JMenuBar_myMenubar.add(JMenu_myMenu_File);
+		JMenuBar_myMenubar.add(JMenu_myMenu_DiaShow);
+		JMenuBar_myMenubar.add(JMenu_myMenu_Morphing);
+		setJMenuBar(JMenuBar_myMenubar);
+		// MENU <--
+		
+		// --> JPanel für ober und untere Splitpane 
+		JPanel_upper.setLayout(new BorderLayout());
+		JPanel_lower.setLayout(new FlowLayout());
+		// JPanel <--
+		
+		JScrollPane jScrollPane_Upper = new  JScrollPane(JPanel_upper);
+		JScrollPane jScrollPane_Lower = new  JScrollPane(JPanel_lower);
+		
+		// --> JSplitPane: 
+		JSplitPane_mySplit1 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, JPanel_upper, jScrollPane_Lower);
+		JSplitPane_mySplit1.setSize(dimWindowSize);
+		
+
+		
+		JSplitPane_mySplit1.setDividerLocation(490);
+		// JSplitPane <--
+		
+		
+		
+		add(JSplitPane_mySplit1, BorderLayout.CENTER);
+		
+		
+		MyPicture myPicture1 = new MyPicture("d:/1.jpg",aBig1.width, aBig1.height, aPrev1.width, aPrev1.height, MyPicture.SHOW_PREVIEW_IMAGE, this);
+		MyPicture myPicture2 = new MyPicture("d:/2.jpg",aBig1.width, aBig1.height, aPrev1.width, aPrev1.height, MyPicture.SHOW_PREVIEW_IMAGE, this);
+		MyPicture myPicture3 = new MyPicture("d:/1.jpg",aBig1.width, aBig1.height, aPrev1.width, aPrev1.height, MyPicture.SHOW_PREVIEW_IMAGE, this);
+		MyPicture myPicture4 = new MyPicture("d:/2.jpg",aBig1.width, aBig1.height, aPrev1.width, aPrev1.height, MyPicture.SHOW_PREVIEW_IMAGE, this);
+		MyPicture myPicture5 = new MyPicture("d:/1.jpg",aBig1.width, aBig1.height, aPrev1.width, aPrev1.height, MyPicture.SHOW_PREVIEW_IMAGE, this);
+		MyPicture myPicture6 = new MyPicture("d:/2.jpg",aBig1.width, aBig1.height, aPrev1.width, aPrev1.height, MyPicture.SHOW_PREVIEW_IMAGE, this);
+		MyPicture myPicture7 = new MyPicture("d:/1.jpg",aBig1.width, aBig1.height, aPrev1.width, aPrev1.height, MyPicture.SHOW_PREVIEW_IMAGE, this);
+		MyPicture myPicture8 = new MyPicture("d:/2.jpg",aBig1.width, aBig1.height, aPrev1.width, aPrev1.height, MyPicture.SHOW_PREVIEW_IMAGE, this);
+		
+		
+		JPanel_lower.add(myPicture1);
+		JPanel_lower.add(myPicture2);
+		JPanel_lower.add(myPicture3);
+		JPanel_lower.add(myPicture4);
+		JPanel_lower.add(myPicture5);
+		JPanel_lower.add(myPicture6);
+		JPanel_lower.add(myPicture7);
+		JPanel_lower.add(myPicture8);
+	
+		JPanel_MoprhSettings.add(showSettings());
+		add(JPanel_MoprhSettings,BorderLayout.WEST);
+		
+		setVisible(true);
+		
+		
+		
+	}
+	
+	public void setBigImage(MyPicture MyPicture2Show)
+	{
+		JPanel_upper.removeAll();
+		
+		MyPicture_TmpPic4View = new MyPicture(MyPicture2Show.getImagePath(), MyPicture2Show.dimImgShowBig.width, MyPicture2Show.dimImgShowBig.height, MyPicture2Show.dimImgPreview.width, MyPicture2Show.dimImgPreview.height, MyPicture.SHOW_BIG_IMAGE, this);
+		JPanel_upper.add(MyPicture_TmpPic4View,BorderLayout.CENTER);
+		JPanel_upper.repaint();
+		MyPicture_TmpPic4View.addMouseListener(this);
+		MyPicture_TmpPic4View.addMouseMotionListener(this);
+	}
+	
+	
+	public JPanel  showSettings()
+	{
+		JPanel JPanel_TheSettings = new JPanel();
+		JPanel_TheSettings.setLayout(new FlowLayout());
+		
+		JTextArea jTextAreaX = new JTextArea();
+		JTextArea jTextAreaY = new JTextArea();
+		JButton JButton_Excecute = new JButton("Ausführen");
+		
+		JPanel_TheSettings.add(jTextAreaX);
+		JPanel_TheSettings.add(jTextAreaY);
+		JPanel_TheSettings.add(JButton_Excecute);
+		
+		return JPanel_TheSettings;
+	}
+	
+	
+	@Override
+	public void paint(Graphics g) 
+	{
+        super.paint(g);
+		g.setColor(Color.WHITE);
+		g.drawRect(click1.x, click1.y, (click2.x - click1.x), (click2.y - click1.y));
+		System.out.println((click2.x - click1.x) + "  "  + (click2.y - click1.y) );
+    }
+	
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+		click2.setLocation(arg0.getPoint());
+		 
+		repaint();
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+//		repaint();
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		click1.setLocation(arg0.getPoint());
+		System.out.println(click1.x + " " + click1.y);
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		click2.setLocation(arg0.getPoint());
+		System.out.println( click1.x + " " +click1.y + " -  "  + click2.x + " " + click2.y  );  
+	}
+	
+}

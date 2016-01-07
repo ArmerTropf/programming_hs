@@ -1,0 +1,30 @@
+import javax.swing.*;
+
+
+public class mySMenu extends JFrame 
+{
+	mySMenu(String myFramename)
+	{
+		super(myFramename);
+		setSize(800,800);
+		setVisible(true);
+		
+		JMenuBar myJMenuBar = new JMenuBar();
+		JMenu myJMenu = new JMenu("Test");
+		JMenuItem myJMenuItem = new JMenuItem("Fuc");
+		
+		myJMenuBar.add(myJMenu);
+		myJMenu.add(myJMenuItem);
+		setJMenuBar(myJMenuBar);
+	}
+	
+	
+	
+	
+	public static void main(String[]args)
+	{
+		mySMenu myMenu = new mySMenu("Meine kleines Fenster");
+		
+	}
+
+}

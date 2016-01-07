@@ -1,0 +1,36 @@
+import mainClass.subClass;
+
+
+public class go 
+{
+	public static void main(String[]args)
+	{
+		mainClass g = new mainClass();
+		
+		subClass f = new 
+	}
+
+}
+
+class mainClass
+{
+	
+	mainClass() 
+	{
+		
+	}
+	
+	
+	class subClass
+	{
+		int sub1 = 0;
+		
+		
+		void subFunction1()
+		{
+			
+		}
+		
+	}
+	
+}

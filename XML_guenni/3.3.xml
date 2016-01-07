@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<START  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="3.3.xsd">
+    
+    <Projekt Name="Optimus" Aufgabe= "Aufgabe_1" Ablaufdatum = "2002-09-24">
+        <Mitarbeiter Schluessel="a1" > 
+            <Name>Mueller</Name>
+            <Vorname/> 
+            <Skill>Chef</Skill>
+            <Vorgesetzter>Mueller</Vorgesetzter>
+        </Mitarbeiter>
+        <Mitarbeiter Schluessel="a2">
+            <Name>Meier</Name>
+            <Vorname/>
+            <Skill>Hans</Skill> 
+            <Vorgesetzter>Mueller</Vorgesetzter>
+        </Mitarbeiter>
+        <Mitarbeiter Schluessel="a3">
+            <Name>Maler</Name>
+            <Vorname>Hugo</Vorname>
+            <Skill>Malen</Skill>
+            <Vorgesetzter>Mueller</Vorgesetzter>
+        </Mitarbeiter>
+        <Team Nummer="t1" Teilaufgabe="Teilaufgabe_4" Mitarbeiter="a1 a2 a7" Teamleiter= "a3">
+            <Mitglieder>a1</Mitglieder>
+            <Mitglieder>a2</Mitglieder>
+            <Mitglieder>a7</Mitglieder>            
+        </Team>
+        <Team Nummer="t2" Teilaufgabe="Teilaufgabe_2" Mitarbeiter="a1 a3" Teamleiter="a2">
+            <Mitglieder>a1</Mitglieder>
+            <Mitglieder>a3</Mitglieder>
+        </Team>
+        
+    </Projekt>
+    <Projekt  Name="Terraform" Aufgabe= "Aufgabe_2" Ablaufdatum = "2018-09-24">
+        <Mitarbeiter Schluessel="a1" > 
+            <Name>Mueller</Name>
+            <Vorname/> 
+            <Skill>Chef</Skill>
+            <Vorgesetzter>Mueller</Vorgesetzter>
+        </Mitarbeiter>
+        <Mitarbeiter Schluessel="a2">
+            <Name>Meier</Name>
+            <Vorname/>
+            <Skill>Hans</Skill> 
+            <Vorgesetzter>Mueller</Vorgesetzter>
+        </Mitarbeiter>
+        <Mitarbeiter Schluessel="a3">
+            <Name>Maler</Name>
+            <Vorname>Hugo</Vorname>
+            <Skill>Malen</Skill>
+            <Vorgesetzter>Mueller</Vorgesetzter>
+        </Mitarbeiter>
+        <Team Nummer="t1" Teilaufgabe="Teilaufgabe_4" Mitarbeiter="a1 a2 a7" Teamleiter= "a3">
+            <Mitglieder>a1</Mitglieder>
+            <Mitglieder>a2</Mitglieder>
+            <Mitglieder>a7</Mitglieder>            
+        </Team>
+        <Team Nummer="t2" Teilaufgabe="Teilaufgabe_2" Mitarbeiter="a1 a3" Teamleiter="a2">
+            <Mitglieder>a1</Mitglieder>
+            <Mitglieder>a3</Mitglieder>
+        </Team>
+        
+    </Projekt>
+</START> 
+    

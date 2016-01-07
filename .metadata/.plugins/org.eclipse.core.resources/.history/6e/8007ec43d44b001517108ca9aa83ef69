@@ -1,0 +1,72 @@
+
+
+public class elementklassen 
+{
+	public static void main(String[]args)
+	{
+		
+		SingleList <Integer> bums = new SingleList<Integer>();
+		
+		bums.add(2);
+		bums.add(55);
+		bums.print();	
+	}
+}
+
+class SingleList <T>
+{
+	
+	int test;
+	
+	private ListElem m_Next;
+	private T m_Elem;
+	private ListElem m_Head;
+	
+	
+	SingleList()
+	{
+		m_Head = null;
+	}
+	
+	public void add(T obj) 
+	{
+		m_Head = new ListElem(obj, m_Head);
+	}
+	
+	public void print()
+	{
+		ListElem test = m_Head;
+		System.out.println(test.getElement());
+		
+		test = (ListElem)test.getNextElement();
+		System.out.println(test.getElement());
+		test = (ListElem)test.getNextElement();
+		
+		System.out.println(test.getElement());
+		
+	}
+	class ListElem
+	{
+		public ListElem(T obj, ListElem next)
+		{
+			m_Next = next;
+			m_Elem = obj;
+			
+		}
+		
+		public T getElement()
+		{
+			return (T)m_Elem;
+		}
+		
+		public T getNextElement()
+		{
+			return (T)m_Next;
+		}
+		
+	}
+
+}
+
+
+

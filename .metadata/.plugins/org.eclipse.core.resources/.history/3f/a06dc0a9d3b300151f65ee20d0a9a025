@@ -1,0 +1,102 @@
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
+
+public class RedBlackTreePanel extends JPanel {
+    {
+        GridBagLayout gbl = new GridBagLayout();
+        setLayout(gbl);
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        GridBagLayout gblFileChooser = new GridBagLayout();
+        JPanel fileChooser = new JPanel(gblFileChooser);
+        gbc.anchor = GridBagConstraints.PAGE_START;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 1.0;
+        gbc.gridy = 0;
+        gbc.gridx = 0;
+        gbc.insets = new Insets(2, 2, 2, 2);
+        gbl.setConstraints(fileChooser, gbc);
+        add(fileChooser);
+
+        JTextField pathTextField = new JTextField("Dateipfad");
+        pathTextField.setEnabled(false);
+
+        gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 0.9;
+        gblFileChooser.setConstraints(pathTextField, gbc);
+        fileChooser.add(pathTextField);
+
+        JButton openFileDialogButton = new JButton("auswählen");
+        gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.weightx = 0.1;
+        gblFileChooser.setConstraints(pathTextField, gbc);
+        fileChooser.add(openFileDialogButton);
+
+
+        GridBagLayout gblMainPanel = new GridBagLayout();
+        JPanel mainPanel = new JPanel(gblMainPanel);
+        gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.gridy = 1;
+        gbc.gridx = 0;
+        gbc.insets = new Insets(2, 2, 2, 2);
+        gbl.setConstraints(mainPanel, gbc);
+        add(mainPanel);
+
+        GridBagLayout gblControlPanel = new GridBagLayout();
+        JPanel controlsPanel = new JPanel(gblControlPanel);
+        controlsPanel.setBorder(new TitledBorder("Steuerung"));
+        gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.anchor = GridBagConstraints.LINE_START;
+        gbc.weightx = 0.5;
+        gbc.weighty = 1;
+        gbc.gridy = 0;
+        gbc.gridx = 0;
+        gbc.insets = new Insets(2, 2, 2, 2);
+        gblMainPanel.setConstraints(controlsPanel, gbc);
+        mainPanel.add(controlsPanel);
+
+        JTextField addTextField = new JTextField();
+        gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.PAGE_START;
+        gbc.weightx = 0.7;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gblControlPanel.setConstraints(addTextField, gbc);
+//        controlsPanel.add(addTextField);
+
+        JButton addButton = new JButton("hinzufügen");
+        gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.PAGE_START;
+        gbc.weightx = 0.3;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gblControlPanel.setConstraints(addButton, gbc);
+//        controlsPanel.add(addButton);
+
+        JPanel listPanel = new JPanel();
+        gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.anchor = GridBagConstraints.LINE_START;
+        gbc.weightx = 0.5;
+        gbc.weighty = 1;
+        gbc.gridy = 0;
+        gbc.gridx = 1;
+        gblMainPanel.setConstraints(listPanel, gbc);
+        mainPanel.add(listPanel);
+
+    }
+}

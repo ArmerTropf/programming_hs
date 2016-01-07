@@ -1,0 +1,27 @@
+<!-- Exercise adopted from "http://www.xml.com/pub/a/2004/05/12/py-xml.html" -->
+<products xmlns:html="http://www.w3.org/1999/xhtml">
+  <product id="1144"
+    xmlns="http://example.com/product-info">
+    <name xml:lang="en">Python Perfect IDE</name>
+    <description>
+      Uses mind-reading technology to anticipate and accommodate
+      all user needs in Python development.  Implements all
+      <html:code>from __future__ import</html:code> features though
+      the year 3000.  Works well with <code>1166</code>.
+    </description>
+  </product>
+  <p:product id="1166" xmlns:p="http://example.com/product-info">
+    <p:name>XSLT Perfect IDE</p:name>
+    <p:description
+      xmlns:xhtml="http://www.w3.org/1999/xhtml"
+      xmlns:xl="http://www.w3.org/1999/xlink"
+	  >
+      <p:code>red</p:code>
+      <xhtml:code>blue</xhtml:code>
+      <html:div>
+        <ref xl:type="simple" xl:href="index.xml">A link</ref>
+      </html:div>
+      <div align="center">now it is over ;-)</div>
+    </p:description>
+  </p:product>
+</products>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">  
+    
+    <xs:element name="START"/>
+    <xs:element name="Projekt">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Mitarbeiter"   maxOccurs="unbounded"/>
+                <xs:element ref="Team" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="Name" type="xs:string"/>
+            <xs:attribute name="Aufgabe" type="xs:string"/>
+            <xs:attribute name="Ablaufdatum" type="xs:date"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="MitarbeiterSchluessel">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="([a][1-9])"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Teilaufgabe">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="([Teilaufgabe]*[_][0-9]*)"/>
+        </xs:restriction>
+    </xs:simpleType> 
+ 
+    <xs:element name="Mitarbeiter" >
+        <xs:complexType>
+            <xs:all> 
+                <xs:element name="Name" />
+                <xs:element name="Vorname" />
+                <xs:element name="Skill"/>   
+                <xs:element name="Vorgesetzter"/> 
+            </xs:all>
+            <xs:attribute name="Schluessel" type="MitarbeiterSchluessel"/>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="Team">
+        <xs:complexType>
+            <xs:sequence>
+               <xs:element name="Mitglieder" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="Nummer" type="xs:string"/>
+            <xs:attribute name="Teilaufgabe" type="Teilaufgabe" />
+            <xs:attribute name="Mitarbeiter" type="xs:string"/>
+            <xs:attribute name="Teamleiter" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

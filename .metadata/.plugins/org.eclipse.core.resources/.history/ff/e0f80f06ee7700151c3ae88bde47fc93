@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"> 
+    <xs:simpleType name="distance">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="([0-9]*[,]?[0-9]{3}[ ][m]|[km])"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="wurzel"/>
+    <xs:element name="example14" type="distance"/>
+    <xs:element name="example15" type="distance"/>
+    <xs:element name="example16" type="distance"/>
+    <xs:element name="example17" type="distance"/>
+    <xs:element name="example18" type="distance"/>
+ 
+ <!--
+ z. B. 0,567 m oder 123 km. Nicht erlaubt sind 003,4 m, 0,567 cm
+ oder 123,2231 km.
+ -->
+</xs:schema>

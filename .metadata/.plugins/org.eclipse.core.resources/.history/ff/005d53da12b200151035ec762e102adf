@@ -1,0 +1,19 @@
+import java.io.*;
+
+
+
+public class go 
+{
+	public static void main(String[] args) throws IOException
+	  {
+	    FileWriter fw = new FileWriter("D:/eigene Dateien/udraw/ausgabe.txt");
+	    BufferedWriter bw = new BufferedWriter(fw);
+
+	    bw.write("test test test");
+	    bw.newLine();
+	    bw.write("tset tset tset");
+
+	    bw.close();
+	  }
+}
+

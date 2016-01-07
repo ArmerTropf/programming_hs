@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT Projekt (Mitarbeiter+,Team+)>
+<!ELEMENT Mitarbeiter (Name, Vorname?, Skill*, Vorgesetzter?)>
+<!ELEMENT Name (#PCDATA) >
+<!ELEMENT Vorname (#PCDATA) >
+<!ELEMENT Skill (#PCDATA) >
+<!ELEMENT Team EMPTY >
+<!ELEMENT Vorgesetzter (#PCDATA) >
+<!ELEMENT Teamleiter (#PCDATA) >
+
+<!ATTLIST Projekt Aufgabe CDATA #REQUIRED >
+<!ATTLIST Projekt Zeit CDATA #REQUIRED >
+<!ATTLIST Mitarbeiter Schlüssel ID #REQUIRED >
+<!ATTLIST Team Mitarbeiter IDREFS #REQUIRED >
+<!ATTLIST Team Nummer ID #REQUIRED >
+<!ATTLIST Team Teilaufgabe CDATA #REQUIRED >
+<!ATTLIST Team Teamleiter IDREF #REQUIRED >

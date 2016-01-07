@@ -1,0 +1,59 @@
+
+
+public class vector
+{
+	public static void main(String[] args)
+	{
+		System.out.println("BAM");
+	}
+}
+
+
+class myVector 
+{
+	private double [] arr_dblVector = new double [3]; 
+	
+	myVector(double x, double y, double z)
+	{
+		setVector(x, y, z );
+	}
+	
+	public void setVector(double x, double y, double z)
+	{
+		arr_dblVector[0] = x;
+		arr_dblVector[1] = y;
+		arr_dblVector[2] = 1;
+		
+	}
+}
+
+class myMatrix
+{
+	private double [][] arr_dblMatrix = new double[3][3];
+	
+	//Modus: 1=Translation
+	myMatrix(double x1, double x2, double x3, double y1, double y2, double y3, double z1, double z2, double z3)
+	{
+		arr_dblMatrix[0][0] = x1;		
+		arr_dblMatrix[0][1] = x2;
+		arr_dblMatrix[0][2] = x3;
+		
+		arr_dblMatrix[1][0] = y1;
+		arr_dblMatrix[1][1] = y2;
+		arr_dblMatrix[1][2] = y3;
+		
+		arr_dblMatrix[2][0] = z1;
+		arr_dblMatrix[2][1] = z2;
+		arr_dblMatrix[2][2] = z3;
+		
+	}
+	
+	public myVector matrix_Mult(myVector myVector)
+	{
+		
+		
+		return null;
+	}
+	
+	
+}

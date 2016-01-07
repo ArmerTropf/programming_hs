@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TrefferDokument>
+    <Treffer>
+        <item>
+            <title>Test 1</title>
+            <description>This is about Android</description>
+        </item>
+    </Treffer>
+    <Treffer>
+        <item>
+            <title>Test 2</title>
+            <description>) the rest</description>
+        </item>
+    </Treffer>
+    <Treffer>
+        <item>
+            <title>Test 4</title>
+            <description>"</description>
+        </item>
+    </Treffer>
+</TrefferDokument>

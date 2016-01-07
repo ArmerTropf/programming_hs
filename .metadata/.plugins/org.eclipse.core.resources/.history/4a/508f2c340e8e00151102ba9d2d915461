@@ -1,0 +1,42 @@
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.*;
+
+import javax.swing.*;
+import javax.tools.Tool;
+
+
+public class ImageActions extends JComponent
+{
+	public ImageActions() 
+	{
+		
+	}
+	
+	
+	public Image getImageFromArray(int [] myImageArray, int width, int height )
+	{
+		MemoryImageSource mediaSource_ImgSrc2 = new MemoryImageSource(width,height,myImageArray,0,width);
+		mediaSource_ImgSrc2.setAnimated(true);
+		mediaSource_ImgSrc2.newPixels();
+		
+		return  createImage(mediaSource_ImgSrc2);		
+	}
+	
+	public int []  getPixelMap(Image grabThisImage)
+	{
+		int [] intArrNewPixelMap = new int[grabThisImage.getWidth(this) * grabThisImage.getHeight(this)];
+				
+		PixelGrabber pxGrab1  = new PixelGrabber(grabThisImage,0,0,grabThisImage.getWidth(this),grabThisImage.getHeight(this),intArrNewPixelMap,0,grabThisImage.getWidth(this));
+		
+		try 
+		{
+			pxGrab1.grabPixels();
+		} 
+		catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		return intArrNewPixelMap;
+	}
+}
